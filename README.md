@@ -1,38 +1,43 @@
-## Sentry log4js appender
+# Sentry Appender for Log4JS
 
-This package requires @sentry/node
+Sends logging events to [Sentry](https://www.sentry.io). This appender uses [@sentry/node](https://www.npmjs.com/package/@sentry/node). Consult the docs for sentry/node, or [sentry configuration](https://docs.sentry.io/platforms/node/configuration/options/) itself, if you want more information on the configuration options below.
 
-An example of the config: multiple sentry server supported
+## Installation
+
+`npm install ianchanning/log4js-sentry`
+
+or
+
+`yarn add ianchanning/log4js-sentry`
+
+(This is a plug-in appender for [log4js](https://log4js-node.github.io/log4js-node/), so you'll need that as well)
+
+
+## Configuration
+
+* `type` - `ianchanning/log4js-sentry`
+* `dsn` - `string` - where to send the events <https://docs.sentry.io/platforms/node/configuration/options/#dsn>
+This appender will scan the msg from the logging event, and pull out any argument of the
+shape `{ tags: [] }` so that it's possible to add additional tags in a normal logging call. See the example below.
+
+## Example
 
 ```javascript
-const log4js = require('log4js');
-
 log4js.configure({
   appenders: {
-    console: { type: 'console' },
-    server1: {  
-      type: 'log4js-node-sentry-appender', 
-      dns: 'https://{KEYS}@{HOST}/{PROJECT_ID}', 
-      env: 'production' 
-    },
-    server2: {  
-      type: 'log4js-node-sentry-appender', 
-      dns: 'https://{KEYS}@{HOST}/{PROJECT_ID}', 
-      env: 'production' 
+    sentry: {
+      type: 'ianchanning/log4js-sentry',
+      dsn: 'https://{KEY}@{HOST}/{PROJECT_ID}',
+      tags: [ 'tag1' ]
     }
   },
   categories: {
-    default: { 
-      appenders: ['console', 'server1'], 
-      level: 'error' 
-    },
-    debug: { 
-      appenders: ['console', 'server2'], 
-      level: 'debug' 
-    }
+    default: { appenders: ['sentry'], level: 'info' }
   }
 });
 
-var logger_default = log4js.getLogger();
-var logger_debug = log4js.getLogger('debug');
+const logger = log4js.getLogger();
+logger.info({ tags: ['my-tag-1', 'my-tag-2'] }, 'Some message');
 ```
+
+This will result in a log message being sent to Sentry with the tags `tag1`, `my-tag-1`, `my-tag-2`.
