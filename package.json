@@ -35,7 +35,6 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@sentry/hub": "^6.17.2",
     "@sentry/node": "^6.17.2",
     "log4js": "^6.4.1"
   },
