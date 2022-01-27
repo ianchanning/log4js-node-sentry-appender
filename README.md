@@ -14,7 +14,7 @@ or
 
 ## Configuration
 
-- `type` - `ianchanning/log4js-sentry`
+- `type` - `log4js-sentry`
 - `dsn` - `string` - where to send the events ([docs](https://docs.sentry.io/platforms/node/configuration/options/#dsn))
 
 This appender will scan the msg from the logging event, and pull out any argument of the
@@ -26,7 +26,7 @@ shape `{ tags: [] }` so that it's possible to add additional tags in a normal lo
 log4js.configure({
   appenders: {
     sentry: {
-      type: 'ianchanning/log4js-sentry',
+      type: 'log4js-sentry',
       dsn: 'https://{KEY}@{HOST}/{PROJECT_ID}',
       tags: ['tag1'],
     },
