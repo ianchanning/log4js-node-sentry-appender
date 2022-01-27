@@ -4,11 +4,11 @@ Sends logging events to [Sentry](https://www.sentry.io). This appender uses [@se
 
 ## Installation
 
-`npm install ianchanning/log4js-sentry`
+`npm install log4js-sentry`
 
 or
 
-`yarn add ianchanning/log4js-sentry`
+`yarn add log4js-sentry`
 
 (This is a plug-in appender for [log4js](https://log4js-node.github.io/log4js-node/), so you'll need that as well)
 
@@ -26,18 +26,18 @@ shape `{ tags: [] }` so that it's possible to add additional tags in a normal lo
 log4js.configure({
   appenders: {
     sentry: {
-      type: "ianchanning/log4js-sentry",
-      dsn: "https://{KEY}@{HOST}/{PROJECT_ID}",
-      tags: ["tag1"],
+      type: 'ianchanning/log4js-sentry',
+      dsn: 'https://{KEY}@{HOST}/{PROJECT_ID}',
+      tags: ['tag1'],
     },
   },
   categories: {
-    default: { appenders: ["sentry"], level: "info" },
+    default: { appenders: ['sentry'], level: 'info' },
   },
 });
 
 const logger = log4js.getLogger();
-logger.info({ tags: ["my-tag-1", "my-tag-2"] }, "Some message");
+logger.info({ tags: ['my-tag-1', 'my-tag-2'] }, 'Some message');
 ```
 
 This will result in a log message being sent to Sentry with the tags `tag1`, `my-tag-1`, `my-tag-2`.
