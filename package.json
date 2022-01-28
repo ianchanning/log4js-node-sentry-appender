@@ -1,6 +1,6 @@
 {
   "name": "log4js-sentry",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Sentry Appender for log4js-node",
   "homepage": "",
   "keywords": [
