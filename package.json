@@ -35,8 +35,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@sentry/node": "^6.17.2",
-    "log4js": "^6.4.1"
+    "@sentry/node": "^6.17.2"
   },
   "devDependencies": {
     "eslint": "^8.7.0",
